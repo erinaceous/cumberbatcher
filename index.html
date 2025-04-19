@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>the cumberbatcher</title>
+        <style>
+            #name {
+                text-transform: capitalize;
+                text-decoration: underline;
+                text-decoration-color: black;
+                font-family: "Comic Sans MS", sans-serif;
+                font-style: italic;
+                color: #019;
+            }
+            .loading {
+                color: #777 !important;
+            }
+            html {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                background-color: #f3f9ff;
+                opacity: 1;
+                background-image: linear-gradient(to right, #ffffff, #ffffff 4rem, #f3f9ff 4rem, #f3f9ff );
+                background-size: 8rem 100%;
+            }
+            body {
+                align-self: center;
+                text-align: center;
+                margin: 0 auto;
+                min-width: 320px;
+                max-width: 100vw;
+                border-radius: 1rem;
+                padding: 1rem;
+                box-shadow: 2rem 2rem 5rem rgba(0, 0, 0, 0.3), .5rem .5rem 1rem rgba(0, 0, 0, 0.5);
+                text-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+                background: #FFFFFF;
+                background: linear-gradient(0deg,rgba(255, 255, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
+
+            }
+            #button {
+                border-radius: 1rem;
+                border-color: #c77;
+                padding: .5rem;
+                font-size: 125%;
+                background-color: #f99;
+                font-style: italic;
+                width: 100%;
+            }
+            #button:hover {
+                background-color: #fbb;
+            }
+            #button:active {
+                background-color: #d77;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Hi! My Name Is</h2>
+        <h1 id="name" class="loading">Namey McNamerson</h1>
+        <button type="button" id="button">How can I help you today?&trade;</button>
+        <script type="module">
+            import { Cumberbatcher } from "./index.js";
+            let cumberbatcher = new Cumberbatcher();
+
+            function doIt() {
+                cumberbatcher.generate();
+                document.getElementById("name").innerText = cumberbatcher.name;
+                document.getElementById("name").classList.remove("loading");
+            }
+
+            document.getElementById("button").addEventListener("click", doIt);
+            doIt();
+        </script>
+    </body>
+</html>

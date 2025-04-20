@@ -36,6 +36,11 @@ export function chooseFragment({
 }
 
 
+const needsHyphen = [
+    "a", "e", "i", "o", "u", "s"
+]
+
+
 export class Word {
     constructor(type = Type.ANY, rude = null) {
         this.type = type
@@ -53,7 +58,18 @@ export class Word {
             return end.fragment
         }
         let word = [start.fragment, end.fragment]
-        if ((start.hyphenate || end.hyphenate) || start.fragment.endsWith(end.fragment[0])) {
+        if (
+            (
+                (start.hyphenate || end.hyphenate)
+                || (start.fragment.toLowerCase().endsWith(end.fragment[0].toLowerCase()))
+                || needsHyphen.includes(start.fragment[start.fragment.length - 1].toLowerCase())
+                || needsHyphen.includes(end.fragment[0].toLowerCase())
+            )
+            && (
+                start.fragment[start.fragment.length - 1] !== " "
+                && end.fragment[0] !== " "
+            )
+        ) {
             word = [start.fragment, "-", end.fragment]
         }
         return word.join("");

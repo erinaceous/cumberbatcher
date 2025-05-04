@@ -45,7 +45,9 @@ const duoNeedsHyphen = [
     "yd",
     "ff",
     "gr",
-    "gg"
+    "gg",
+    "ng",
+    "ry",
 ]
 
 
@@ -97,7 +99,7 @@ export class Word {
                 || (startChar === endChar)
                 || needsHyphen.includes(startChar)
                 || needsHyphen.includes(endChar)
-                || duoNeedsHyphen.includes(startChar + endChar)
+                || duoNeedsHyphen.includes(endChar + startChar)
             )
             && (
                 start.fragment[start.fragment.length - 1] !== " "

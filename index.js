@@ -40,9 +40,17 @@ const needsHyphen = [
     "a", "e", "i", "o", "u", "s"
 ]
 
+const duoNeedsHyphen = [
+    "ss",
+    "yd",
+    "ff",
+    "gr",
+    "gg"
+]
+
 
 const needsCaps = [
-    " ", ".", "-", "!"
+    " ", ".", "-", "!", ",", "*"
 ]
 
 
@@ -81,12 +89,15 @@ export class Word {
             return titleCase(end.fragment);
         }
         let word = [start.fragment, end.fragment]
+        let endChar = start.fragment[start.fragment.length - 1].toLowerCase();
+        let startChar = end.fragment[0].toLowerCase();
         if (
             (
                 (start.hyphenate || end.hyphenate)
-                || (start.fragment.toLowerCase().endsWith(end.fragment[0].toLowerCase()))
-                || needsHyphen.includes(start.fragment[start.fragment.length - 1].toLowerCase())
-                || needsHyphen.includes(end.fragment[0].toLowerCase())
+                || (startChar === endChar)
+                || needsHyphen.includes(startChar)
+                || needsHyphen.includes(endChar)
+                || duoNeedsHyphen.includes(startChar + endChar)
             )
             && (
                 start.fragment[start.fragment.length - 1] !== " "

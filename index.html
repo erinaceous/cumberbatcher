@@ -3,20 +3,41 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="https://fonts.cdnfonts.com/css/handwritten" rel="stylesheet">
         <title>the cumberbatcher</title>
         <style>
+            #name-outer {
+                background-color: rgba(250, 250, 250, 0.5);
+                margin: 1rem -1rem;
+                padding: 0px;
+                cursor: pointer;
+                width: calc(100% + 2rem);
+                height: 8rem;
+                overflow: clip;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
             #name {
+                margin: 0;
                 text-decoration: underline;
                 text-decoration-color: #999;
                 text-decoration-style: dotted;
                 text-decoration-skip: none;
-                font-family: "Comic Sans MS", sans-serif;
+                text-decoration-skip-ink: all;
+                text-decoration-skip-spaces: none;
+                font-family: "Handwritten", "Comic Sans MS", sans-serif;
                 font-style: italic;
+                font-size: 300%;
                 color: #019;
-                background-color: rgba(250, 250, 250, 0.75);
-                margin: 1rem -1rem;
-                padding: 1rem;
-                cursor: pointer;
+                text-align: center;
+                text-overflow: fade;
+                transform-origin: center;
+                width: 100%;
+                height: 100%;
+                padding-right: 1rem;
+                text-align: justify-all;
             }
             #name:hover {
                 color: #45D;
@@ -44,8 +65,7 @@
                 align-self: center;
                 text-align: center;
                 margin: 0 auto;
-                min-width: 320px;
-                max-width: 75vw;
+                max-width: calc(min(40rem, 100vw) - 4rem);
                 border-radius: 1rem;
                 padding: 1rem;
                 box-shadow: 2rem 2rem 5rem rgba(0, 0, 0, 0.3), .5rem .5rem 1rem rgba(0, 0, 0, 0.5);
@@ -75,7 +95,11 @@
     </head>
     <body>
         <h2>Hi! My Name Is:</h2>
-        <h1 id="name" class="loading" title="Click to copy!">Namey McNamerson</h1>
+        <div id="name-outer">
+            <div id="name-wrapper">
+                <h1 id="name" class="loading" title="Click to copy!">Namey McNamerson</h1>
+            </div>
+        </div>
         <button type="button" id="button">How can I help you today?&trade;</button>
         <script type="module">
             import { Cumberbatcher } from "./index.js";
@@ -85,6 +109,7 @@
                 cumberbatcher.generate();
                 document.getElementById("name").innerHTML = cumberbatcher.name;
                 document.getElementById("name").classList.remove("loading");
+                resize();
             }
 
             function copy() {
@@ -93,8 +118,18 @@
                 );
             }
 
+            function resize() {
+                let outer = document.getElementById("name-outer");
+                let name = document.getElementById("name");
+                let w = (outer.clientWidth / (name.scrollWidth));
+                let h = (outer.clientHeight / (name.scrollHeight));
+                name.style.scale = Math.min(w, h);
+            }
+
             document.getElementById("button").addEventListener("click", doIt);
             document.getElementById("name").addEventListener("click", copy);
+            window.addEventListener("resize", resize);
+            resize();
             doIt();
         </script>
     </body>

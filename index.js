@@ -41,6 +41,29 @@ const needsHyphen = [
 ]
 
 
+const needsCaps = [
+    " ", ".", "-", "!"
+]
+
+
+export function titleCase(text) {
+    if (!text || text.length === 0) {
+        return "";
+    }
+    let array = text.split("");
+    array[0] = array[0].toUpperCase();
+    for (let i = array.length - 1; i >= 0; i--) {
+        if (needsCaps.includes(array[i])) {
+            if (i == array.length - 1) {
+                continue;
+            }
+            array[i + 1] = array[i + 1].toUpperCase();
+        }
+    }
+    return array.join("");
+}
+
+
 export class Word {
     constructor(type = Type.ANY, rude = null) {
         this.type = type
@@ -51,11 +74,11 @@ export class Word {
     generate() {
         let start = chooseFragment({type: this.type, position: Position.START, rude: this.rude});
         if (start.position === Position.ALONE) {
-            return start.fragment
+            return titleCase(start.fragment);
         }
         let end = chooseFragment({type: this.type, position: Position.END, rude: this.rude});
         if (end.position === Position.ALONE) {
-            return end.fragment
+            return titleCase(end.fragment);
         }
         let word = [start.fragment, end.fragment]
         if (
@@ -70,9 +93,10 @@ export class Word {
                 && end.fragment[0] !== " "
             )
         ) {
-            word = [start.fragment, "-", end.fragment]
+            word = [titleCase(start.fragment), "-", titleCase(end.fragment)]
         }
-        return word.join("");
+        let text = word.join("");
+        return titleCase(text);
     }
 }
 
@@ -80,11 +104,14 @@ export class Word {
 export class Cumberbatcher {
     constructor(rude = null) {
         this.rude = rude;
+        this.forename = null;
+        this.surname = null;
+        this.name = null;
     }
 
     generate() {
-        let forename = new Word(Type.FORENAME, this.rude).text;
-        let surname = new Word(Type.SURNAME, this.rude).text;
-        this.name = [forename, surname].join(" ");
+        this.forename = new Word(Type.FORENAME, this.rude);
+        this.surname = new Word(Type.SURNAME, this.rude);
+        this.name = [this.forename.text, this.surname.text].join(" ");
     }
 }

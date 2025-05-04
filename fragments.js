@@ -50,7 +50,7 @@ export class Fragment {
 
 export const fragments = [
     new Fragment(" 'core values' ", {}),
-    new Fragment(" *skkrt* "),
+    new Fragment(" *skkrt* ", {}),
     new Fragment(" 4chan.pdf ", {}),
     new Fragment(" NaN ", {}),
     new Fragment(" Total War ", {}),

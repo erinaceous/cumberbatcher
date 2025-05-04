@@ -165,9 +165,11 @@
                 top: calc(50vh - ((1345px / 2) + 31.5rem));
                 left: calc(50vw - (768px / 2) + 4rem);
                 width: 40rem;
+                filter: drop-shadow(2rem 2rem 5rem rgba(0, 0, 0, 0.3)) drop-shadow(.5rem .5rem 1rem rgba(0, 0, 0, 0.5));
             }
             #top-lanyard {
                 clip-path: rect(1028px 700px 1200px 309px);
+                filter: unset;
             }
         </style>
     </head>
@@ -196,7 +198,7 @@
                 document.getElementById("name").innerHTML = cumberbatcher.name;
                 document.getElementById("name").classList.remove("loading");
                 resize();
-                swing();
+                //swing();
             }
 
             function copy() {
@@ -226,11 +228,22 @@
                 }, 1000);
             }
 
+            function swingIn() {
+                document.getElementsByTagName("html")[0].classList.add("swinger");
+            }
+
+            function swingOut() {
+                document.getElementsByTagName("html")[0].classList.remove("swinger");
+            }
+
             document.getElementById("button").addEventListener("click", doIt);
             document.getElementById("name").addEventListener("click", copy);
+            document.body.addEventListener("mouseover", swingIn);
+            document.body.addEventListener("mouseout", swingOut);
             window.addEventListener("resize", resize);
             resize();
             doIt();
+            swing();
         </script>
     </body>
 </html>

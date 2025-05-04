@@ -59,6 +59,31 @@
                 opacity: 1;
                 background-image: linear-gradient(to right, #ffffff, #ffffff 4rem, #f3f9ff 4rem, #f3f9ff);
                 background-size: 8rem 100%;
+                overflow: hidden;
+                animation-timing-function: ease-in-out;
+                animation-duration: 1.5s;
+                animation-direction: alternate;
+                animation-name: swinger;
+                animation-fill-mode: both;
+                animation-iteration-count: 1;
+                transform-origin: top center;
+            }
+            @keyframes swinger {
+                0% {
+                    rotate: 0deg;
+                }
+                33% {
+                    rotate: -1deg;
+                }
+                66% {
+                    rotate: 1deg;
+                }
+                100% {
+                    rotate: 0deg;
+                }
+            }
+            .swinger {
+                animation-iteration-count: infinite;
             }
             body {
                 font-family: sans-serif;
@@ -170,11 +195,12 @@
             import { Cumberbatcher } from "./index.js";
             let cumberbatcher = new Cumberbatcher();
 
-            function doIt() {
+            async function doIt() {
                 cumberbatcher.generate();
                 document.getElementById("name").innerHTML = cumberbatcher.name;
                 document.getElementById("name").classList.remove("loading");
                 resize();
+                swing();
             }
 
             function copy() {
@@ -183,12 +209,26 @@
                 );
             }
 
-            function resize() {
+            async function resize() {
                 let outer = document.getElementById("name-outer");
                 let name = document.getElementById("name");
                 let w = (outer.clientWidth / (name.scrollWidth));
                 let h = (outer.clientHeight / (name.scrollHeight));
                 name.style.scale = Math.min(w, h);
+            }
+
+            let swinger = null;
+
+            function swing() {
+                if (swinger) {
+                    clearTimeout(swinger);
+                }
+                let html = document.getElementsByTagName("html")[0];
+                html.classList.add("swinger");
+                let swung = new Date().getTime();
+                swinger = setTimeout(() => {
+                    html.classList.remove("swinger");
+                }, 1500 + (swung % 1500));
             }
 
             document.getElementById("button").addEventListener("click", doIt);

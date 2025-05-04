@@ -91,8 +91,14 @@ export class Word {
             return titleCase(end.fragment);
         }
         let word = [start.fragment, end.fragment]
-        let endChar = start.fragment[start.fragment.length - 1].toLowerCase();
-        let startChar = end.fragment[0].toLowerCase();
+        let endChar = "";
+        let startChar = "";
+        if (start.fragment.length > 0) {
+            endChar = start.fragment[start.fragment.length - 1].toLowerCase();
+        }
+        if (end.fragment.length > 0) {
+            startChar = end.fragment[0].toLowerCase();
+        }
         if (
             (
                 (start.hyphenate || end.hyphenate)
@@ -102,8 +108,8 @@ export class Word {
                 || duoNeedsHyphen.includes(endChar + startChar)
             )
             && (
-                start.fragment[start.fragment.length - 1] !== " "
-                && end.fragment[0] !== " "
+                endChar !== " "
+                && startChar !== " "
             )
         ) {
             word = [titleCase(start.fragment), "-", titleCase(end.fragment)]

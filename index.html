@@ -60,13 +60,9 @@
                 background-image: linear-gradient(to right, #ffffff, #ffffff 4rem, #f3f9ff 4rem, #f3f9ff);
                 background-size: 8rem 100%;
                 overflow: hidden;
-                animation-timing-function: ease-in-out;
-                animation-duration: 1.5s;
-                animation-direction: alternate;
-                animation-name: swinger;
-                animation-fill-mode: both;
-                animation-iteration-count: 1;
                 transform-origin: top center;
+                transition: rotate 1s ease-in-out;
+                rotate: 0deg;
             }
             @keyframes swinger {
                 0% {
@@ -83,7 +79,7 @@
                 }
             }
             .swinger {
-                animation-iteration-count: infinite;
+                rotate: -2deg;
             }
             body {
                 font-family: sans-serif;
@@ -225,10 +221,9 @@
                 }
                 let html = document.getElementsByTagName("html")[0];
                 html.classList.add("swinger");
-                let swung = new Date().getTime();
                 swinger = setTimeout(() => {
                     html.classList.remove("swinger");
-                }, 1500 + (swung % 1500));
+                }, 1000);
             }
 
             document.getElementById("button").addEventListener("click", doIt);

@@ -156,7 +156,8 @@
                 overflow: hidden;
             }
             .lanyard {
-                position: fixed;
+                position: absolute;
+                float: left;
                 top: calc(50vh - ((1345px / 2) + 31.5rem));
                 left: calc(50vw - (768px / 2) + 4rem);
                 width: 40rem;
@@ -242,8 +243,8 @@
 
             document.getElementById("button").addEventListener("click", doIt);
             document.getElementById("name").addEventListener("click", copy);
-            document.body.addEventListener("mouseover", swingIn);
-            document.body.addEventListener("mouseout", swingOut);
+            document.getElementById("nametag").addEventListener("mouseover", swingIn);
+            document.getElementById("nametag").addEventListener("mouseout", swingOut);
             window.addEventListener("resize", resize);
             resize();
             doIt();

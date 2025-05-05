@@ -49,20 +49,21 @@
             .loading {
                 color: #777 !important;
             }
-            html {
+            body {
+                font-family: sans-serif;
+                text-align: left;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
+                width: 100vw;
                 height: 100vh;
                 background-color: #f3f9ff;
-                opacity: 1;
+                margin: 0;
+                padding: 0;
                 background-image: linear-gradient(to right, #ffffff, #ffffff 4rem, #f3f9ff 4rem, #f3f9ff);
                 background-size: 8rem 100%;
                 overflow: hidden;
-                transform-origin: top center;
-                transition: rotate 1s ease-in-out;
-                rotate: 0deg;
             }
             @keyframes swinger {
                 0% {
@@ -81,9 +82,7 @@
             .swinger {
                 rotate: -2deg;
             }
-            body {
-                font-family: sans-serif;
-                text-align: left;
+            #outer {
                 margin: 0;
                 padding: 0;
                 width: calc(min(45rem, 100vw) - 4rem);
@@ -91,6 +90,9 @@
                 box-shadow: 2rem 2rem 5rem rgba(0, 0, 0, 0.3), .5rem .5rem 1rem rgba(0, 0, 0, 0.5);
                 background: none;
                 overflow: hidden;
+                transform-origin: top center;
+                transition: rotate 1s ease-in-out;
+                rotate: 0deg;
             }
             #nametag {
                 box-sizing: border-box;
@@ -153,15 +155,6 @@
                 border-radius: 4rem;
                 overflow: hidden;
             }
-            /*#tie {*/
-            /*    filter: sepia(0.5);*/
-            /*    position: fixed;*/
-            /*    top: -40rem;*/
-            /*    translate: -65rem 0px;*/
-            /*    left: 25vw;*/
-            /*    height: 175vh;*/
-            /*    filter: drop-shadow(2rem 2rem 5rem rgba(0, 0, 0, 0.3)) drop-shadow(.5rem .5rem 1rem rgba(0, 0, 0, 0.5));*/
-            /*}*/
             .lanyard {
                 position: fixed;
                 top: calc(50vh - ((1345px / 2) + 31.5rem));
@@ -184,21 +177,23 @@
         <footer>
             <a href="https://github.com/erinaceous/cumberbatcher" target="_new">what the hell is this</a>
         </footer>
-        <img class="lanyard" src="lanyard.png" />
-        <div id="hole"></div>
-        <div id="nametag">
-            <div id="greeting">
-                <h2>Hello&trade;</h2>
-                <h3>My name is</h3>
-            </div>
-            <div id="name-outer">
-                <div id="name-wrapper">
-                    <h1 id="name" class="loading" title="Click to copy!">Namey McNamerson</h1>
+        <div id="outer">
+            <img class="lanyard" src="lanyard.png" />
+            <div id="hole"></div>
+            <div id="nametag">
+                <div id="greeting">
+                    <h2>Hello&trade;</h2>
+                    <h3>My name is</h3>
                 </div>
+                <div id="name-outer">
+                    <div id="name-wrapper">
+                        <h1 id="name" class="loading" title="Click to copy!">Namey McNamerson</h1>
+                     </div>
+                </div>
+                <button type="button" id="button">&blacktriangleright;&nbsp;How can I help?&trade;</button>
             </div>
-            <button type="button" id="button">&blacktriangleright;&nbsp;How can I help?&trade;</button>
+            <img id="top-lanyard" class="lanyard" src="lanyard.png" />
         </div>
-        <img id="top-lanyard" class="lanyard" src="lanyard.png" />
         <script type="module">
             import { Cumberbatcher } from "./index.js";
             let cumberbatcher = new Cumberbatcher();
@@ -208,7 +203,6 @@
                 document.getElementById("name").innerHTML = cumberbatcher.name;
                 document.getElementById("name").classList.remove("loading");
                 resize();
-                //swing();
             }
 
             function copy() {
@@ -231,7 +225,7 @@
                 if (swinger) {
                     clearTimeout(swinger);
                 }
-                let html = document.getElementsByTagName("html")[0];
+                let html = document.getElementById("outer");
                 html.classList.add("swinger");
                 swinger = setTimeout(() => {
                     html.classList.remove("swinger");
@@ -239,11 +233,11 @@
             }
 
             function swingIn() {
-                document.getElementsByTagName("html")[0].classList.add("swinger");
+                document.getElementById("outer").classList.add("swinger");
             }
 
             function swingOut() {
-                document.getElementsByTagName("html")[0].classList.remove("swinger");
+                document.getElementById("outer").classList.remove("swinger");
             }
 
             document.getElementById("button").addEventListener("click", doIt);

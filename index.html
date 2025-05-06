@@ -183,15 +183,13 @@
             }
             footer {
                 position: fixed;
+                float: left;
                 left: 0.5rem;
                 bottom: 0.5rem;
             }
         </style>
     </head>
     <body>
-        <footer>
-            <a href="https://github.com/erinaceous/cumberbatcher" target="_new">what the hell is this</a>
-        </footer>
         <div id="outer">
             <img class="lanyard" src="lanyard.png" />
             <div id="hole"></div>
@@ -209,6 +207,9 @@
             </div>
             <img id="top-lanyard" class="lanyard" src="lanyard.png" />
         </div>
+        <footer>
+            <a href="https://github.com/erinaceous/cumberbatcher" target="_new">what the hell is this</a>
+        </footer>
         <script type="module">
             import { Cumberbatcher } from "./index.js";
             let cumberbatcher = new Cumberbatcher();

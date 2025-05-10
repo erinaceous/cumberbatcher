@@ -236,6 +236,7 @@
             
             async function doIt() {
                 document.getElementById("outer").classList.remove("swinger");
+                document.getElementById("button").setAttribute("disabled", "");
                 window.requestAnimationFrame(() => {
                     if (swinger) {
                         clearTimeout(swinger);
@@ -247,6 +248,7 @@
                         document.getElementById("name").classList.remove("loading");
                         resize();
                         document.getElementById("outer").classList.remove("swinger");
+                        document.getElementById("button").removeAttribute("disabled");
                     }, 1000);
                 });
             }

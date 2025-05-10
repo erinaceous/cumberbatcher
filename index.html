@@ -39,6 +39,7 @@
                 height: 100%;
                 padding-right: 1rem;
                 text-align: justify-all;
+                transition: opacity 1s ease-out;
             }
             #name:hover {
                 color: #45D;
@@ -195,7 +196,7 @@
                 }
 
                 #name {
-                    animation: fade-in 3s ease-in;
+                    opacity: 0;
                 }
             }
             footer {
@@ -231,15 +232,23 @@
             import { Cumberbatcher } from "./index.js";
             let cumberbatcher = new Cumberbatcher();
 
+            let swinger = null;
+            
             async function doIt() {
                 document.getElementById("outer").classList.remove("swinger");
-                window.requestAnimationFrame(swing);
-                //document.getElementById("name-outer").classList.add("loading");
-                cumberbatcher.generate();
-                document.getElementById("name").innerHTML = cumberbatcher.name;
-                document.getElementById("name").classList.remove("loading");
-                document.getElementById("name-outer").classList.remove("loading");
-                resize();
+                window.requestAnimationFrame(() => {
+                    if (swinger) {
+                        clearTimeout(swinger);
+                    }
+                    cumberbatcher.generate();
+                    document.getElementById("outer").classList.add("swinger");
+                    swinger = setTimeout(() => {
+                        document.getElementById("name").innerHTML = cumberbatcher.name;
+                        document.getElementById("name").classList.remove("loading");
+                        resize();
+                        document.getElementById("outer").classList.remove("swinger");
+                    }, 1000);
+                });
             }
 
             function copy() {
@@ -255,36 +264,12 @@
                 let h = (outer.clientHeight / (name.scrollHeight));
                 name.style.scale = Math.min(w, h);
             }
-
-            let swinger = null;
-
-            function swing() {
-                if (swinger) {
-                    clearTimeout(swinger);
-                }
-                let html = document.getElementById("outer");
-                html.classList.add("swinger");
-                swinger = setTimeout(() => {
-                    html.classList.remove("swinger");
-                }, 1000);
-            }
-
-            function swingIn() {
-                document.getElementById("outer").classList.add("swinger");
-            }
-
-            function swingOut() {
-                document.getElementById("outer").classList.remove("swinger");
-            }
-
+            
             document.getElementById("button").addEventListener("click", doIt);
             document.getElementById("name").addEventListener("click", copy);
-            //document.getElementById("nametag").addEventListener("mouseover", swingIn);
-            //document.getElementById("nametag").addEventListener("mouseout", swingOut);
             window.addEventListener("resize", resize);
             resize();
             doIt();
-            //swing();
         </script>
     </body>
 </html>

@@ -68,28 +68,6 @@
                 background-image: linear-gradient(to right, #ffffff, #ffffff 4rem, #f3f9ff 4rem, #f3f9ff);
                 background-size: 8rem 100%;
             }
-            @keyframes swinger {
-                0% {
-                    rotate: 0deg;
-                }
-                33% {
-                    rotate: -1deg;
-                }
-                66% {
-                    rotate: 1deg;
-                }
-                100% {
-                    rotate: 0deg;
-                }
-            }
-            @keyframes fade-in {
-                0% {
-                    opacity: 0;
-                }
-                100% {
-                    opacity: 1;
-                }
-            }
             #outer {
                 margin: 0;
                 padding: 0;
@@ -102,13 +80,6 @@
                 rotate: 0.1deg;
                 scale: 1.001;
             }
-            #name-outer {
-                transition: width 1s ease-in-out;
-                width: auto;
-            }
-            #name-outer.loading {
-                width: 0px;
-            }
             #nametag {
                 box-sizing: border-box;
                 margin: 0 auto;
@@ -120,6 +91,7 @@
                 text-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
                 background-image: linear-gradient(283deg, darkblue 33%, royalblue 75%, darkblue 100%);
                 color: white;
+                transition: background-image 1s ease-in-out;
             }
             #button {
                 margin: -1rem;
@@ -141,6 +113,9 @@
             }
             #button:active {
                 background-color: #ffffff66;
+            }
+            #button[disabled] {
+                background-color: inset !important;
             }
             #greeting {
                 text-align: left;
@@ -189,12 +164,16 @@
             .swinger {
                 rotate: -2deg !important;
                 scale: 1.05 !important;
-                box-shadow: 3rem 3rem 7.5rem rgba(0, 0, 0, 0.3), .75rem .75rem 1.5rem rgba(0, 0, 0, 0.5) !important;
+                box-shadow: 4rem 4rem 10rem rgba(0, 0, 0, 0.3), 1rem 1rem 2rem rgba(0, 0, 0, 0.5) !important;
 
                 .lanyard {
                     rotate: -4deg !important;
                 }
 
+                #nametag {
+                    background-image: linear-gradient(285deg, darkblue 33%, royalblue 75%, darkblue 100%);
+                }
+                
                 #name {
                     opacity: 0;
                 }

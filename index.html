@@ -80,6 +80,11 @@
                 rotate: 0.1deg;
                 scale: 1.001;
             }
+            @property --bg-rot {
+                syntax: '<angle>';
+                initial-value: 283deg;
+                inherits: false; 
+            }
             #nametag {
                 box-sizing: border-box;
                 margin: 0 auto;
@@ -89,9 +94,9 @@
                 border-radius: 1rem;
                 padding: 1rem;
                 text-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
-                background-image: linear-gradient(283deg, darkblue 33%, royalblue 75%, darkblue 100%);
+                background-image: linear-gradient(var(--bg-rot), darkblue 33%, royalblue 75%, darkblue 100%);
                 color: white;
-                transition: background-image 1s ease-in-out;
+                transition: --bg-rot 1s ease-in-out;
             }
             #button {
                 margin: -1rem;
@@ -171,7 +176,7 @@
                 }
 
                 #nametag {
-                    background-image: linear-gradient(285deg, darkblue 33%, royalblue 75%, darkblue 100%);
+                    --bg-rot: 285deg;
                 }
                 
                 #name {

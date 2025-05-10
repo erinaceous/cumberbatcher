@@ -81,6 +81,14 @@
                     rotate: 0deg;
                 }
             }
+            @keyframes fade-in {
+                0% {
+                    opacity: 0;
+                }
+                100% {
+                    opacity: 1;
+                }
+            }
             #outer {
                 margin: 0;
                 padding: 0;
@@ -185,6 +193,10 @@
                 .lanyard {
                     rotate: -4deg !important;
                 }
+
+                #name {
+                    animation: fade-in 1s ease-in;
+                }
             }
             footer {
                 position: fixed;
@@ -220,6 +232,7 @@
             let cumberbatcher = new Cumberbatcher();
 
             async function doIt() {
+                swing();
                 document.getElementById("name-outer").classList.add("loading");
                 cumberbatcher.generate();
                 document.getElementById("name").innerHTML = cumberbatcher.name;
@@ -265,12 +278,12 @@
 
             document.getElementById("button").addEventListener("click", doIt);
             document.getElementById("name").addEventListener("click", copy);
-            document.getElementById("nametag").addEventListener("mouseover", swingIn);
-            document.getElementById("nametag").addEventListener("mouseout", swingOut);
+            //document.getElementById("nametag").addEventListener("mouseover", swingIn);
+            //document.getElementById("nametag").addEventListener("mouseout", swingOut);
             window.addEventListener("resize", resize);
             resize();
             doIt();
-            swing();
+            //swing();
         </script>
     </body>
 </html>

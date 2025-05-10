@@ -232,8 +232,9 @@
             let cumberbatcher = new Cumberbatcher();
 
             async function doIt() {
-                swing();
-                document.getElementById("name-outer").classList.add("loading");
+                document.getElementById("outer").classList.remove("swinger");
+                window.requestAnimationFrame(swing);
+                //document.getElementById("name-outer").classList.add("loading");
                 cumberbatcher.generate();
                 document.getElementById("name").innerHTML = cumberbatcher.name;
                 document.getElementById("name").classList.remove("loading");
